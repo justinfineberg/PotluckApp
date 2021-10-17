@@ -21,7 +21,23 @@ const checkUsernameExists = async (req, res, next) => {
   }
 };
 
+
+const checkIfUsernameIsReal = async (req, res, next) => {
+    try {
+      const [user] = await Users.findBy({ username: req.body.username });
+      if (!user) {
+        res.status(404).json({ message: "invalid credentials" });
+      } else {
+        req.user = user;
+        next();
+      }
+    } catch (err) {
+      next(err);
+    }
+  };
+
 module.exports = {
   allFilledOut,
   checkUsernameExists,
+  checkIfUsernameIsReal
 };

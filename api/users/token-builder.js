@@ -5,6 +5,7 @@ function buildToken(user) {
     const payload = {
       subject: user.id,
       username: user.username,
+      user_id: user.user_id
     };
     const options = {
       expiresIn: "1d",

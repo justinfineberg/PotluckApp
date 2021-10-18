@@ -1,4 +1,6 @@
 const Users = require("./user-model");
+const jwt = require("jsonwebtoken")
+const { JWT_SECRET } = require("./secrets/index")
 
 const allFilledOut = (req, res, next) => {
   if (!req.body.username || !req.body.password) {
@@ -36,8 +38,25 @@ const checkIfUsernameIsReal = async (req, res, next) => {
     }
   };
 
+  const restricted = (req, res, next)=>{
+      const token = req.headers.authorization;
+      if (!token){
+          return res.status(400).json({message: "Access Denied"})
+      }
+
+      jwt.verify(token, JWT_SECRET, (err, decodedToken)=>{
+          if (err){
+              res.status(401).json({message: "token invalid"})
+          } else {
+              req.decodedToken = decodedToken;
+              next();
+          }
+      })
+  }
+
 module.exports = {
   allFilledOut,
   checkUsernameExists,
-  checkIfUsernameIsReal
+  checkIfUsernameIsReal,
+  restricted
 };

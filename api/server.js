@@ -2,7 +2,7 @@ const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
 const userRouter = require('./users/user-router')
-
+const partyRouter = require('./parties/party-router')
 
 
 
@@ -12,17 +12,18 @@ server.use(helmet())
 server.use(cors())
 
 server.use('/api/auth', userRouter )
+server.use('/api', partyRouter)
 
-server.get('/api/users', async (req, res) => {
-  res.json(await getAllUsers())
-})
+// server.get('/api/users', async (req, res) => {
+//   res.json(await getAllUsers())
+// })
 
-server.post('/api/users', async (req, res) => {
-  res.status(201).json(await insertUser(req.body))
-})
+// server.post('/api/users', async (req, res) => {
+//   res.status(201).json(await insertUser(req.body))
+// })
 
-server.use("*", (req, res, next, err)=>{
-  res.status(500).json(err)
-})
+// server.use("*", (req, res, next, err)=>{
+//   res.status(500).json(err)
+// })
 
 module.exports = server

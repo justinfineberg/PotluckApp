@@ -11,6 +11,7 @@ exports.up = async (knex) => {
       table.string('date')
       table.string('time')
       table.string('location')
+      table.string('party_url_string').unique()
       table.integer('user_id')
         .unsigned()
         .notNullable() // debatable

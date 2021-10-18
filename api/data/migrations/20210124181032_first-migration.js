@@ -20,10 +20,6 @@ exports.up = async (knex) => {
         //.onUpdate('CASCADE') // you don't have to worry about this
        //.onDelete('CASCADE')
     })
-    .createTable('items', table=>{
-      table.increments('item_id')
-      table.string('item_name').notNullable()
-    })
     .createTable('parties_items', table=>{
       table.increments('party_item_id')
       table.boolean('completed').notNullable()
@@ -35,20 +31,13 @@ exports.up = async (knex) => {
         .inTable('parties')
         .onUpdate('CASCADE') // you don't have to worry about this
         .onDelete('CASCADE')
-        table.integer('item_id')
-        .unsigned()
-        .notNullable() // debatable
-        .references('item_id')
-        .inTable('items')
-       // .onUpdate('CASCADE') // you don't have to worry about this
-        //.onDelete('CASCADE')
+      table.string('item_name').notNullable()
     })
 }
 
 exports.down = async (knex) => {
   await knex.schema
   .dropTableIfExists('parties_items')
-  .dropTableIfExists('items')
   .dropTableIfExists('parties')
   .dropTableIfExists('users')
 }

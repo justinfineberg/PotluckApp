@@ -46,10 +46,16 @@ async function addParty(user_id, party){
     return newPartyObject
 }
 
+async function removeParty(party_id){
+    const deleted = db('parties').where("party_id", party_id).del()
+    return deleted
+}
+
 
 module.exports = {
     getAllPartiesByUser,
     getAllItemsForParty,
     addItem,
-    addParty
+    addParty,
+    removeParty
 }

@@ -8,7 +8,7 @@ router.get("/parties", restricted, async(req, res, next)=>{
         const allParties = await Parties.getAllPartiesByUser(req.decodedToken.user_id)
         res.json(allParties)
     }catch (err){
-        next(err)
+        res.json(err)
     }
 })
 
@@ -18,7 +18,7 @@ router.post("/parties", restricted, async(req, res, next)=>{
         const newParty = await Parties.addParty(user_id, req.body)
         res.json(newParty)
     } catch (err){
-        next(err)
+        res.json(err)
     }
 })
 

@@ -21,7 +21,7 @@ function findBy(filter) {
 }
 
 function getAllPartyURLS(){
-    return db("parties").select("party_url_string")
+    return db("parties").select("party_url_string", "party_id")
 }
 
 module.exports = {

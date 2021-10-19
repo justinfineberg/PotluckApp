@@ -20,8 +20,13 @@ function findBy(filter) {
   return db("users").select("username", "password", "user_id").where(filter);
 }
 
+function getAllPartyURLS(){
+    return db("parties").select("party_url_string")
+}
+
 module.exports = {
   insertUser,
   getAllUsers,
   findBy,
+  getAllPartyURLS
 };

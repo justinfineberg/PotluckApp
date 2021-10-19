@@ -36,4 +36,13 @@ router.post("/login", allFilledOut, checkIfUsernameIsReal, (req, res, next) => {
   }
 });
 
+router.get("/allpartylinks", async (req, res, next)=>{
+  try{
+    const allURLS = await Users.getAllPartyURLS()
+    res.json(allURLS)
+  }catch(err) {
+    console.log(err)
+  }
+})
+
 module.exports = router;

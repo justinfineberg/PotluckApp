@@ -31,7 +31,7 @@ router.delete('/parties/:party_id', restricted, async(req, res, next)=>{
     }
 })
 
-router.get("/items/:party_id", restricted, async(req,res,next)=>{
+router.get("/items/:party_id", async(req,res,next)=>{
     try{
         const allItemsForParty = await Parties.getAllItemsForParty(req.params.party_id)
         res.json(allItemsForParty)

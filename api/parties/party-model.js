@@ -19,7 +19,7 @@ async function addItem(item, party_id) {
       party_id: party_id,
       item_name: item.item_name,
     },
-    ["completed", "person_bringing", "party_id", "item_name"]
+    ["completed", "person_bringing", "party_id", "item_name", "party_item_id"]
   );
   return newItemObject;
 }
